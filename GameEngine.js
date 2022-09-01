@@ -29,6 +29,7 @@ class GameEngine {
 
         this.currentTime = Date.now();
         this.lastTime = Date.now();
+        this.gui = new dat.GUI({name: 'CAR Controls'});
 
         this.setUp();
     }
@@ -94,6 +95,7 @@ class GameEngine {
             }
         });
 
+        this.setUpGui()
         window.onresize = () => this.resize();
         this.resize();
 
@@ -164,6 +166,48 @@ class GameEngine {
         //reset variables
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height;
+    }
+
+    setUpGui()
+    {
+        let colorsFolder = this.gui.addFolder('Car Colors');
+        let wheelsColorsFolder = colorsFolder.addFolder('Wheels');
+        let trailConfig = this.gui.addFolder('Trail');
+        let physicsFolder = this.gui.addFolder('Physics');
+
+        colorsFolder.addColor(this.car.config, 'color');
+        wheelsColorsFolder.addColor(this.car.config.wheelsColor, 0);
+        wheelsColorsFolder.addColor(this.car.config.wheelsColor, 1);
+        wheelsColorsFolder.addColor(this.car.config.wheelsColor, 2);
+
+        wheelsColorsFolder.addColor(this.car.config.wheelsColor, 3);
+        trailConfig.add(this.car.config, 'drawTrail');
+        trailConfig.addColor(this.car.config.trailDefaultConfig, 'color');
+        trailConfig.add(this.car.config.trailDefaultConfig, 'rainbow');
+
+
+        physicsFolder.add(this.car.config, 'gravity');
+        physicsFolder.add(this.car.config, 'mass');
+        physicsFolder.add(this.car.config, 'inertiaScale');
+        physicsFolder.add(this.car.config, 'halfWidth');
+        physicsFolder.add(this.car.config, 'cgToFront');
+        physicsFolder.add(this.car.config, 'cgToRear');
+        physicsFolder.add(this.car.config, 'cgToFrontAxle');
+        physicsFolder.add(this.car.config, 'cgToRearAxle');
+        physicsFolder.add(this.car.config, 'cgHeight');
+        physicsFolder.add(this.car.config, 'wheelRadius');
+        physicsFolder.add(this.car.config, 'wheelWidth');
+        physicsFolder.add(this.car.config, 'tireGrip');
+        physicsFolder.add(this.car.config, 'lockGrip');
+        physicsFolder.add(this.car.config, 'engineForce');
+        physicsFolder.add(this.car.config, 'brakeForce');
+        physicsFolder.add(this.car.config, 'eBrakeForce');
+        physicsFolder.add(this.car.config, 'weightTransfer');
+        physicsFolder.add(this.car.config, 'maxSteer');
+        physicsFolder.add(this.car.config, 'cornerStiffnessFront');
+        physicsFolder.add(this.car.config, 'cornerStiffnessRear');
+        physicsFolder.add(this.car.config, 'airResist');
+        physicsFolder.add(this.car.config, 'rollResist');
     }
 
     start() {

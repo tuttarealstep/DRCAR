@@ -37,7 +37,7 @@ class CarConfigurations {
         brakeTime: 1,
         brakeTimePercentage: 20,*/
         color: '#424242',
-        rainbow: true
+        rainbow: false
       };
     }
   }
